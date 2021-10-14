@@ -9,7 +9,6 @@ namespace RMQ_Hello_World
         static void Main(string[] args)
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };
-            factory.set
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
