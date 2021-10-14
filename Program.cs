@@ -12,23 +12,16 @@ namespace RMQ_Hello_World
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                channel.QueueDeclare(queue: "hello",
-                                     durable: false,
-                                     exclusive: false,
-                                     autoDelete: false,
-                                     arguments: null);
+                channel.QueueDeclare("queueTest",  false, false, false, null);
 
-                string message = "Hello World!";
+                string message = "test message";
                 var body = Encoding.UTF8.GetBytes(message);
 
-                channel.BasicPublish(exchange: "",
-                                     routingKey: "hello",
-                                     basicProperties: null,
-                                     body: body);
+                channel.BasicPublish("", "queueTest", null, body);
                 Console.WriteLine(" [x] Sent {0}", message);
             }
 
-            Console.WriteLine(" Press [enter] to exit.");
+            Console.WriteLine("Any key to exit.");
             Console.ReadLine();
         }
     }
